@@ -24,4 +24,9 @@ public class MiniGameManager : MonoBehaviour
         rulesPanel.SetActive(true);
         gamePanel.SetActive(false);
     }
+
+    public void HideRules()
+    {
+        rulesPanel.SetActive(false);
+    }
 }

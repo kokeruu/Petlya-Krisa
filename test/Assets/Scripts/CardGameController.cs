@@ -1,105 +1,177 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
+using UnityEngine.UI;  // Для кнопок
 
 public class CardGameController : MonoBehaviour
 {
     public CardCollection cardCollection;
-    public CardUIController cardUI;
-    public Text pointsText;
-    public Text resultText;
+    public TMP_Text scoreText;
+    public TMP_Text resultText;
+    public CardUIController cardUIController;
+
+    public Button hitButton;
+    public Button standButton;
+    public Button restartButton;
 
     private List<CardData> deck;
     private List<CardData> playerHand;
+
     private bool isGameOver = false;
+
+    void Start()
+    {
+        SetupButtons();
+        StartNewGame();
+    }
+
+    void SetupButtons()
+    {
+        restartButton.gameObject.SetActive(false);
+
+        hitButton.onClick.RemoveAllListeners();
+        standButton.onClick.RemoveAllListeners();
+        restartButton.onClick.RemoveAllListeners();
+
+        hitButton.onClick.AddListener(Hit);
+        standButton.onClick.AddListener(Stand);
+        restartButton.onClick.AddListener(RestartGame);
+    }
 
     public void StartNewGame()
     {
+        isGameOver = false;
+        resultText.text = "";
         deck = new List<CardData>(cardCollection.cards);
         ShuffleDeck();
         playerHand = new List<CardData>();
-        isGameOver = false;
-        resultText.text = "";
+        cardUIController.ClearCards();
 
         DrawCard();
         DrawCard();
-        UpdateUI();
+        UpdateScoreUI();
+
+        hitButton.interactable = true;
+        standButton.interactable = true;
+        restartButton.gameObject.SetActive(false);
     }
 
     public void DrawCard()
     {
-        if (isGameOver || deck.Count == 0)
+        if (deck.Count == 0)
+        {
+            Debug.Log("Колода пуста!");
             return;
+        }
 
         int index = Random.Range(0, deck.Count);
         CardData drawnCard = deck[index];
         deck.RemoveAt(index);
 
         playerHand.Add(drawnCard);
-        UpdateUI();
+        cardUIController.ShowCard(drawnCard.cardSprite);
 
-        if (CalculatePoints() > 21)
+        Debug.Log($"Выдана карта: {drawnCard.cardName} ({drawnCard.cardValue})");
+    }
+
+    public void Hit()
+    {
+        if (isGameOver) return;
+
+        DrawCard();
+        UpdateScoreUI();
+
+        int score = CalculateScore();
+
+        if (score > 21)
         {
-            GameOver("Ты проиграл! Перебор.");
+            EndGame();
         }
     }
 
     public void Stand()
     {
-        int playerTotal = CalculatePoints(playerHand);
-        Debug.Log($"Игрок остановился. Очки: {playerTotal}");
+        if (isGameOver) return;
 
-        // Имитируем ход дилера: он берёт карты пока не наберёт 17 и больше
-        List<CardData> dealerHand = new List<CardData>();
-        int dealerTotal = 0;
-
-        while (dealerTotal < 17)
-        {
-            if (deck.Count == 0) break;
-            int index = Random.Range(0, deck.Count);
-            CardData drawnCard = deck[index];
-            deck.RemoveAt(index);
-            dealerHand.Add(drawnCard);
-            dealerTotal = CalculatePoints(dealerHand);
-        }
-
-        Debug.Log($"Дилер набрал: {dealerTotal}");
-
-        string result;
-
-        if (dealerTotal > 21 || playerTotal > dealerTotal)
-            result = "Ты победил!";
-        else if (dealerTotal == playerTotal)
-            result = "Ничья!";
-        else
-            result = "Ты проиграл.";
-
-        // Покажи результат в UI (если есть)
-        if (resultText != null)
-            resultText.text = result;
+        EndGame(playerStopped: true);
     }
 
 
-    private void GameOver(string message)
+    private void EndGame(bool playerStopped = false)
     {
         isGameOver = true;
-        resultText.text = message;
+        hitButton.interactable = false;
+        standButton.interactable = false;
+        restartButton.gameObject.SetActive(true);
+
+        int playerScore = CalculateScore();
+        int cardCount = playerHand.Count;
+        int minOpponentScore = cardCount * 2;
+        int maxOpponentScore = cardCount * 11;
+
+        int opponentScore = Random.Range(minOpponentScore, maxOpponentScore + 1);
+
+        if (playerScore > 21)
+        {
+            if (opponentScore > 21)
+            {
+                resultText.text = $"Ничья! У обоих перебор. У соперника: {opponentScore}";
+            }
+            else
+            {
+                resultText.text = $"Вы проиграли. У соперника: {opponentScore}";
+            }
+        }
+        else if (playerStopped)
+        {
+            if (opponentScore > 21)
+            {
+                resultText.text = $"Вы победили! У соперника перебор: {opponentScore}";
+            }
+            else if (opponentScore > playerScore)
+            {
+                resultText.text = $"Вы проиграли. У соперника: {opponentScore}";
+            }
+            else if (opponentScore < playerScore)
+            {
+                resultText.text = $"Вы победили! У соперника: {opponentScore}";
+            }
+            else
+            {
+                resultText.text = $"Ничья! У соперника тоже {opponentScore}";
+            }
+        }
     }
 
-    private void UpdateUI()
+    private void RestartGame()
     {
-        cardUI.ShowCards(playerHand);
-        pointsText.text = "Очки: " + CalculatePoints();
+        StartNewGame();
     }
 
-    private int CalculatePoints()
+    private int CalculateScore()
     {
-        int total = 0;
+        int score = 0;
+        int aceCount = 0;
+
         foreach (var card in playerHand)
         {
-            total += card.cardValue;
+            score += card.cardValue;
+            if (card.cardValue == 11) aceCount++;
         }
-        return total;
+
+        while (score > 21 && aceCount > 0)
+        {
+            score -= 10;
+            aceCount--;
+        }
+
+        return score;
+    }
+
+    private void UpdateScoreUI()
+    {
+        int score = CalculateScore();
+        scoreText.text = "Счёт: " + score;
     }
 
     private void ShuffleDeck()
@@ -107,7 +179,7 @@ public class CardGameController : MonoBehaviour
         for (int i = 0; i < deck.Count; i++)
         {
             int j = Random.Range(0, deck.Count);
-            var temp = deck[i];
+            CardData temp = deck[i];
             deck[i] = deck[j];
             deck[j] = temp;
         }
