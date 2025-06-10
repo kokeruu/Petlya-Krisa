@@ -5,7 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Inventory System - Kinnly/Scenes/SampleScene.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 77de24159125848bf8e832bd74ed3ace
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/coridor.unity
+    guid: 271d52a925907e34b90ba080733394dd
+  - enabled: 1
+    path: Assets/Scenes/hall.unity
+    guid: ec595cd704150aa49968f34426426bc2
   m_configObjects: {}
