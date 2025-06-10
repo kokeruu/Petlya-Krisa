@@ -1,0 +1,171 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a741bd1278636435180fcbea231c22f6, type: 3}
+  m_Name: StandardDeck
+  m_EditorClassIdentifier: 
+  cards:
+  - cardName: "2 \u0431\u0443\u0431\u043D\u044B"
+    cardValue: 2
+    cardSprite: {fileID: 21300000, guid: b0c7c8656524343979143ecb2a6e1196, type: 3}
+  - cardName: "2 \u0447\u0435\u0440\u0432\u0438"
+    cardValue: 2
+    cardSprite: {fileID: 21300000, guid: 5e7fea79f64dc41f088963bcefbe4f6d, type: 3}
+  - cardName: "2 \u043A\u0440\u0435\u0441\u0442\u0438"
+    cardValue: 2
+    cardSprite: {fileID: 21300000, guid: e9ce363274b02433287c2b8f817be33c, type: 3}
+  - cardName: "2 \u043F\u0438\u043A\u0438"
+    cardValue: 2
+    cardSprite: {fileID: 21300000, guid: 8deb1595fafe94b29bcf78d4a1ed4c57, type: 3}
+  - cardName: "3 \u0431\u0443\u0431\u043D\u044B"
+    cardValue: 3
+    cardSprite: {fileID: 21300000, guid: 3210b5b37355b446cbd6029f16c5a961, type: 3}
+  - cardName: "3 \u0447\u0435\u0440\u0432\u0438"
+    cardValue: 3
+    cardSprite: {fileID: 21300000, guid: 9309edd4598a541c19ae8109ac2603ec, type: 3}
+  - cardName: "3 \u043A\u0440\u0435\u0441\u0442\u0438"
+    cardValue: 3
+    cardSprite: {fileID: 21300000, guid: ed710f09f361045959b7261cf7546e1e, type: 3}
+  - cardName: "3 \u043F\u0438\u043A\u0438"
+    cardValue: 3
+    cardSprite: {fileID: 21300000, guid: 7ff0000f5cb7b432fa5f7093203e1ccd, type: 3}
+  - cardName: "4 \u0431\u0443\u0431\u043D\u044B"
+    cardValue: 4
+    cardSprite: {fileID: 21300000, guid: 8d412fa455a9f4adb86dd2ea4ae34539, type: 3}
+  - cardName: "4 \u0447\u0435\u0440\u0432\u0438"
+    cardValue: 4
+    cardSprite: {fileID: 21300000, guid: 85e29606797684ea2b4d691668d70167, type: 3}
+  - cardName: "4 \u043A\u0440\u0435\u0441\u0442\u0438"
+    cardValue: 4
+    cardSprite: {fileID: 21300000, guid: 507920caa82234385a3e13eb723e7ff2, type: 3}
+  - cardName: "4 \u043F\u0438\u043A\u0438"
+    cardValue: 4
+    cardSprite: {fileID: 21300000, guid: 5e395b12596c04ba6a9704a0adcc4b4e, type: 3}
+  - cardName: "5 \u0431\u0443\u0431\u043D\u044B"
+    cardValue: 5
+    cardSprite: {fileID: 21300000, guid: 8a067ad73fbe343b591eab8a4acc17c8, type: 3}
+  - cardName: "5 \u0447\u0435\u0440\u0432\u0438"
+    cardValue: 5
+    cardSprite: {fileID: 21300000, guid: 85ae901c00ce04e86abeb4072bd89ca0, type: 3}
+  - cardName: "5 \u043A\u0440\u0435\u0441\u0442\u0438"
+    cardValue: 5
+    cardSprite: {fileID: 21300000, guid: 990e8415481124a21ab3e05f0efcfd56, type: 3}
+  - cardName: "5 \u043F\u0438\u043A\u0438"
+    cardValue: 5
+    cardSprite: {fileID: 21300000, guid: 8d454ad48de1c4f6aa1d86bc531de407, type: 3}
+  - cardName: "6 \u0431\u0443\u0431\u043D\u044B"
+    cardValue: 6
+    cardSprite: {fileID: 21300000, guid: 5cad0754aa3d44380b3cf23913ba857c, type: 3}
+  - cardName: "6 \u0447\u0435\u0440\u0432\u0438"
+    cardValue: 6
+    cardSprite: {fileID: 21300000, guid: e7b7fb3d4f83a4ce98daaaa44fb9031c, type: 3}
+  - cardName: "6 \u043A\u0440\u0435\u0441\u0442\u0438"
+    cardValue: 6
+    cardSprite: {fileID: 21300000, guid: d1287a4ea740b47f49f82bed7b6ac1f5, type: 3}
+  - cardName: "6 \u043F\u0438\u043A\u0438"
+    cardValue: 6
+    cardSprite: {fileID: 21300000, guid: 0cb7c5f3b000f4a5a92f899717820b13, type: 3}
+  - cardName: "7 \u0431\u0443\u0431\u043D\u044B"
+    cardValue: 7
+    cardSprite: {fileID: 21300000, guid: aeb9a9f20c358438da6b1eaa608596d1, type: 3}
+  - cardName: "7 \u0447\u0435\u0440\u0432\u0438"
+    cardValue: 7
+    cardSprite: {fileID: 21300000, guid: 2f2a63f6925ce4cb6bc871cdabd491f6, type: 3}
+  - cardName: "7 \u043A\u0440\u0435\u0441\u0442\u0438"
+    cardValue: 7
+    cardSprite: {fileID: 21300000, guid: 13e9a91707712407f9dc345da4af836d, type: 3}
+  - cardName: "7 \u043F\u0438\u043A\u0438"
+    cardValue: 7
+    cardSprite: {fileID: 21300000, guid: 5bbd911cc61434caea2602e2e9e093de, type: 3}
+  - cardName: "8 \u0431\u0443\u0431\u043D\u044B"
+    cardValue: 8
+    cardSprite: {fileID: 21300000, guid: 6af88339edd084ed7aeb462a87e25534, type: 3}
+  - cardName: "8 \u0447\u0435\u0440\u0432\u0438"
+    cardValue: 8
+    cardSprite: {fileID: 21300000, guid: dcbd3ab9cc100490f839a7471f8d6a24, type: 3}
+  - cardName: "8 \u043A\u0440\u0435\u0441\u0442\u0438"
+    cardValue: 8
+    cardSprite: {fileID: 21300000, guid: f02b2a4a11fd948828e1dc051a5ea95e, type: 3}
+  - cardName: "8 \u043F\u0438\u043A\u0438"
+    cardValue: 8
+    cardSprite: {fileID: 21300000, guid: c7776315fa66b43c9a2397f5082a08ff, type: 3}
+  - cardName: "9 \u0431\u0443\u0431\u043D\u044B"
+    cardValue: 9
+    cardSprite: {fileID: 21300000, guid: 878a5524be5d448f5b1ae4fe3f399f88, type: 3}
+  - cardName: "9 \u0447\u0435\u0440\u0432\u0438"
+    cardValue: 9
+    cardSprite: {fileID: 21300000, guid: 1519f17fcf49e4a1e96a9dbb6fff2f6e, type: 3}
+  - cardName: "9 \u043A\u0440\u0435\u0441\u0442\u0438"
+    cardValue: 9
+    cardSprite: {fileID: 21300000, guid: bf1bc16210b6d47c5a2a4cef26353549, type: 3}
+  - cardName: "9 \u043F\u0438\u043A\u0438"
+    cardValue: 9
+    cardSprite: {fileID: 21300000, guid: b6d3b3de8e88b4df2a2acf4086d5068a, type: 3}
+  - cardName: "10 \u0431\u0443\u0431\u043D\u044B"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: b35a0e1469396456bae9009c29545ee1, type: 3}
+  - cardName: "10 \u0447\u0435\u0440\u0432\u0438"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: a1498e11f9cc94c93845cacf590618ae, type: 3}
+  - cardName: "10 \u043A\u0440\u0435\u0441\u0442\u0438"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: 3a3dc52ffb0a24a5583069583b80cae9, type: 3}
+  - cardName: "10 \u043F\u0438\u043A\u0438"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: af522e529d6494a3c84c809c95618c4a, type: 3}
+  - cardName: "\u0432\u0430\u043B\u0435\u0442 \u0431\u0443\u0431\u043D\u044B"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: c0c27eaa2b03e4aef8590fffd5db4e87, type: 3}
+  - cardName: "\u0432\u0430\u043B\u0435\u0442 \u0447\u0435\u0440\u0432\u0438"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: 01f601695bb5540febd43d96953b3c7d, type: 3}
+  - cardName: "\u0432\u0430\u043B\u0435\u0442 \u043A\u0440\u0435\u0441\u0442\u0438"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: 0621e120e381d47809468ba1ded1d2d8, type: 3}
+  - cardName: "\u0432\u0430\u043B\u0435\u0442 \u043F\u0438\u043A\u0438"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: 634077670a2d04c4c94923472f1d2edc, type: 3}
+  - cardName: "\u043A\u043E\u0440\u043E\u043B\u0435\u0432\u0430 \u0431\u0443\u0431\u043D\u044B"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: c5ba82cca6610451cbcdab16d0fcf639, type: 3}
+  - cardName: "\u043A\u043E\u0440\u043E\u043B\u0435\u0432\u0430 \u0447\u0435\u0440\u0432\u0438"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: 1439f8f8a9b5f4874aa50aad50ba7381, type: 3}
+  - cardName: "\u043A\u043E\u0440\u043E\u043B\u0435\u0432\u0430 \u043A\u0440\u0435\u0441\u0442\u0438"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: 598668863107c4722b2c8f27dc2d8144, type: 3}
+  - cardName: "\u043A\u043E\u0440\u043E\u043B\u0435\u0432\u0430 \u043F\u0438\u043A\u0438"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: 960eb9e565b02457ca68cf4518eb0764, type: 3}
+  - cardName: "\u043A\u043E\u0440\u043E\u043B\u044C \u0431\u0443\u0431\u043D\u044B"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: 146a3366e5da44c48ba3be9ffc8338e5, type: 3}
+  - cardName: "\u043A\u043E\u0440\u043E\u043B\u044C \u0447\u0435\u0440\u0432\u0438"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: b9de3c36aff9a48a4b919c0cd9fe3674, type: 3}
+  - cardName: "\u043A\u043E\u0440\u043E\u043B\u044C \u043A\u0440\u0435\u0441\u0442\u0438"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: 4cccb3e906dee48fc80cc5db6adf3616, type: 3}
+  - cardName: "\u043A\u043E\u0440\u043E\u043B\u044C \u043F\u0438\u043A\u0438"
+    cardValue: 10
+    cardSprite: {fileID: 21300000, guid: 59d291ce0d0a04044941da67d89af58c, type: 3}
+  - cardName: "\u0442\u0443\u0437 \u0431\u0443\u0431\u043D\u044B"
+    cardValue: 11
+    cardSprite: {fileID: 21300000, guid: 390edce27f1db4b62b9062065549dbe1, type: 3}
+  - cardName: "\u0442\u0443\u0437 \u0447\u0435\u0440\u0432\u0438"
+    cardValue: 11
+    cardSprite: {fileID: 21300000, guid: a08958682514843a1ba4d3154e536b70, type: 3}
+  - cardName: "\u0442\u0443\u0437 \u043A\u0440\u0435\u0441\u0442\u0438"
+    cardValue: 11
+    cardSprite: {fileID: 21300000, guid: 92f3e0150a96242a7ab44539b50ef6cf, type: 3}
+  - cardName: "\u0442\u0443\u0437 \u043F\u0438\u043A\u0438"
+    cardValue: 11
+    cardSprite: {fileID: 21300000, guid: 31233910f51894a93885e98a19acce9b, type: 3}
