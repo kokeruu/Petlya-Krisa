@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 152488093755382936}
   - component: {fileID: 3775523208340510705}
   m_Layer: 5
-  m_Name: CardUI
+  m_Name: CardPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

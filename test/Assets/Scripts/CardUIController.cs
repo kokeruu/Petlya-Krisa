@@ -1,22 +1,32 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class CardUIController : MonoBehaviour
 {
     public Transform cardHolder;
     public GameObject cardPrefab;
 
-    public void ShowCard(Sprite sprite)
+    private List<GameObject> spawnedCards = new List<GameObject>();
+
+    public void ShowCards(List<CardData> hand)
     {
-        GameObject card = Instantiate(cardPrefab, cardHolder);
-        card.GetComponent<Image>().sprite = sprite;
+        ClearCards();
+
+        foreach (var card in hand)
+        {
+            GameObject cardGO = Instantiate(cardPrefab, cardHolder);
+            cardGO.GetComponent<Image>().sprite = card.cardSprite;
+            spawnedCards.Add(cardGO);
+        }
     }
 
     public void ClearCards()
     {
-        foreach (Transform child in cardHolder)
+        foreach (GameObject go in spawnedCards)
         {
-            Destroy(child.gameObject);
+            Destroy(go);
         }
+        spawnedCards.Clear();
     }
 }
