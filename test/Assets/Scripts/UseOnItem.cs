@@ -16,6 +16,7 @@ public class UseOnItem : MonoBehaviour
             Debug.Log("Using: ");
             ConversationManager.Instance.StartConversation(useOn);
             PlayerController.IsTalking = true;
+            PlayerController.IsUsing= true;
             Debug.Log("Talk: ");
         }
     }

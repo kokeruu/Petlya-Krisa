@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     [Header("Main Components")]
+     [SerializeField] private GameObject inventory;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private Transform slotsContainer;
     [SerializeField] private Button openCloseButton;
@@ -41,7 +42,7 @@ public class InventoryUI : MonoBehaviour
             return;
         }
         inventorySystem = InventorySystem.current;
-        DontDestroyOnLoad(inventorySystem);
+        DontDestroyOnLoad(inventory);
         // Настраиваем кнопку
         openCloseButton.onClick.AddListener(ToggleInventory);
         // Скрываем инвентарь при старте если нужно

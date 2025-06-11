@@ -20,7 +20,7 @@ public class Search : MonoBehaviour
                 Debug.Log("Searching: ");
                 ConversationManager.Instance.StartConversation(SearchIn);
                 ConversationManager.Instance.SetBool("IsFull", IsFull);
-                PlayerController.IsTalking = true;
+                // PlayerController.IsSearching = true;
 
                 IsFull = false;
 

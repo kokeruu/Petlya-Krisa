@@ -9,8 +9,11 @@ public class PlayerController : MonoBehaviour
     public bool IsMoving = false;
     private bool FaceRight = false;
     public static bool IsTalking = false;
+    public static bool IsUsing = false;
+    public static bool IsSearching = false;
     void Awake()
     {
+        IsTalking = false;
         anim = GetComponent<Animator>();
         target = new Vector2(transform.position.x, transform.position.y);
     }
