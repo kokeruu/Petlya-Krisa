@@ -93,7 +93,8 @@ public class InventoryUI : MonoBehaviour
 
     public void ToggleInventory()
     {
-        bool newState = !inventoryPanel.activeSelf;
+        if (!PlayerController.IsSearching || !PlayerController.IsUsing ||!PlayerController.IsTalking )
+        {bool newState = !inventoryPanel.activeSelf;
         inventoryPanel.SetActive(newState);
         PlayerController.IsTalking = newState;
         ConversationStarter.IsInv = newState;
@@ -101,7 +102,7 @@ public class InventoryUI : MonoBehaviour
         if (newState)
         {
             UpdateInventoryDisplay();
-        }
+        }}
     }
 
     private void UpdateInventoryDisplay()

@@ -10,7 +10,7 @@ public class UseOnItem : MonoBehaviour
     [SerializeField] private bool IsUsable;
     void OnMouseDown()
     {
-        if (IsUse)
+        if (IsUse && !ConversationStarter.IsInv &&!PlayerController.IsTalking && !PlayerController.IsSearching)
         {
             ConversationManager.Instance.SetBool("IsUsable", IsUsable);
             Debug.Log("Using: ");

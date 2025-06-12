@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using DialogueEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
-public class ConversationStarter : MonoBehaviour
+public class ConversationOleg : MonoBehaviour
 {
         [SerializeField] private NPCConversation myConversation;
         public static bool IsInv = false;
-        public int InteractionNumber = Suzhet.Oleg;
+        private int InteractionNumber = Suzhet.Oleg;
 
 
     
@@ -18,8 +18,7 @@ public class ConversationStarter : MonoBehaviour
             Debug.Log("Talk: ");
             ConversationManager.Instance.StartConversation(myConversation);
             ConversationManager.Instance.SetInt("InteractionNumber", InteractionNumber++);
-
-            
+            Suzhet.Oleg = InteractionNumber;
         }
         
 }

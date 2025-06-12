@@ -6,11 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     public static Vector2 target;
     public static Animator anim;
-    public bool IsMoving = false;
+    public static bool IsMoving = false;
     private bool FaceRight = false;
     public static bool IsTalking = false;
     public static bool IsUsing = false;
     public static bool IsSearching = false;
+    public float speed = 30f;
     void Awake()
     {
         IsUsing = false;
@@ -22,23 +23,24 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (IsMoving)
+        if (IsMoving && target == new Vector2(transform.position.x, transform.position.y))
         {
-            if (target == new Vector2(transform.position.x, transform.position.y))
-            {
                 IsMoving = false;
                 anim.SetBool("IsMoving", false);
-            }
         }
         if (IsTalking || IsUsing || IsSearching)
         {
-
-            target = new Vector2(transform.position.x, transform.position.y);
-            IsMoving = false;
             anim.SetBool("IsMoving", false);
+            IsMoving = false;
+            target = new Vector2(transform.position.x, transform.position.y);
+            
 
         }
+<<<<<<< Updated upstream
         if (!IsTalking && !IsUsing && !IsSearching)
+=======
+        else
+>>>>>>> Stashed changes
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (Input.GetMouseButtonDown(0))
@@ -56,7 +58,7 @@ public class PlayerController : MonoBehaviour
             }
 
 
-            transform.position = Vector2.MoveTowards(transform.position, target, Time.deltaTime * 30f);
+            transform.position = Vector2.MoveTowards(transform.position, target, Time.deltaTime * speed);
         }
     }
 
@@ -80,6 +82,8 @@ public class PlayerController : MonoBehaviour
     public void ConvEnd()
     {
         PlayerController.IsTalking = false;
+        PlayerController.IsSearching = false;
+        PlayerController.IsUsing = false;
         Debug.Log("Talk end: ");
     }
         public void SearchEnd()

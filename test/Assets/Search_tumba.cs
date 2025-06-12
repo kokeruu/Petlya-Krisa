@@ -5,10 +5,10 @@ using DialogueEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-public class Search : MonoBehaviour
+public class Search_tumba : MonoBehaviour
 {
         [SerializeField] private NPCConversation SearchIn;
-        [SerializeField] private bool IsFull;
+        [SerializeField] private bool IsFull=!Suzhet.IsCrayonTaken;
         public static bool IsUse = false;
         [SerializeField] private NPCConversation useOn;
         [SerializeField] private bool IsUsable;
@@ -18,24 +18,13 @@ public class Search : MonoBehaviour
         PlayerController.anim.SetBool("IsMoving", false);
         if (!ConversationStarter.IsInv && !PlayerController.IsTalking)
         {
-<<<<<<< Updated upstream
-            InventorySystem.current.Add(referenceData);
-        }
-        if (!ConversationStarter.IsInv )
-=======
             if (!UseOnItem.IsUse)
->>>>>>> Stashed changes
             {
                 PlayerController.IsSearching = true;
                 Debug.Log("Searching: ");
                 ConversationManager.Instance.StartConversation(SearchIn);
                 ConversationManager.Instance.SetBool("IsFull", IsFull);
-<<<<<<< Updated upstream
-                PlayerController.IsSearching = true;
-
-=======
->>>>>>> Stashed changes
-                IsFull = false;
+                Suzhet.IsCrayonTaken = true;
             }
             if (UseOnItem.IsUse)
             {
