@@ -7,7 +7,7 @@ public class OutlineOnHover : MonoBehaviour
     private Color originalColor;
     
     [SerializeField] private Color hoverTint = new Color(0.8f, 0.3f, 0.3f, 1f); // Бордовый оттенок
-    [SerializeField] private float tintIntensity = 0.2f; // Интенсивность эффекта (0-1)
+    [SerializeField] private float tintIntensity = 0.5f; // Интенсивность эффекта (0-1)
 
     private void Awake()
     {

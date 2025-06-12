@@ -20,7 +20,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/hall.unity
     guid: ec595cd704150aa49968f34426426bc2
-  - enabled: 1
-    path: Assets/Scenes/hall_1.unity
-    guid: bdf3d26bda1838e48b6014222f991ad7
   m_configObjects: {}

@@ -13,8 +13,6 @@ public class PlayerController : MonoBehaviour
     public static bool IsSearching = false;
     void Awake()
     {
-        IsUsing = false;
-        IsSearching = false;
         IsTalking = false;
         anim = GetComponent<Animator>();
         target = new Vector2(transform.position.x, transform.position.y);
@@ -30,7 +28,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("IsMoving", false);
             }
         }
-        if (IsTalking || IsUsing || IsSearching)
+        if (IsTalking )
         {
 
             target = new Vector2(transform.position.x, transform.position.y);
@@ -38,12 +36,12 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("IsMoving", false);
 
         }
-        if (!IsTalking && !IsUsing && !IsSearching)
+        if (!IsTalking)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (Input.GetMouseButtonDown(0))
             {
-
+                
 
 
                 target = new Vector2(mousePos.x, mousePos.y);
@@ -77,14 +75,9 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("IsMoving", false);
 
     }
-    public void ConvEnd()
+        public void ConvEnd()
     {
         PlayerController.IsTalking = false;
         Debug.Log("Talk end: ");
-    }
-        public void SearchEnd()
-    {
-        PlayerController.IsSearching = false;
-        Debug.Log("Search end: ");
     }
 }

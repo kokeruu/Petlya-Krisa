@@ -97,7 +97,7 @@ public class InventoryUI : MonoBehaviour
         inventoryPanel.SetActive(newState);
         PlayerController.IsTalking = newState;
         ConversationStarter.IsInv = newState;
-        UseOnItem.IsUse = !newState;
+       
         if (newState)
         {
             UpdateInventoryDisplay();
@@ -256,10 +256,9 @@ public void OnSlotClicked(InventorySlotUI slot)
             Debug.Log($"Using item: {selectedSlot.Item.data.displayName}");
 
             itemActionPanel.SetActive(false);
-            UseOnItem.IsUse = true;
         }
         ToggleInventory();
-        
+        UseOnItem.IsUse = true;
 
     }
 
