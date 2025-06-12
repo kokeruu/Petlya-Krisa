@@ -18,23 +18,12 @@ public class Search : MonoBehaviour
         PlayerController.anim.SetBool("IsMoving", false);
         if (!ConversationStarter.IsInv && !PlayerController.IsTalking)
         {
-<<<<<<< Updated upstream
-            InventorySystem.current.Add(referenceData);
-        }
-        if (!ConversationStarter.IsInv )
-=======
             if (!UseOnItem.IsUse)
->>>>>>> Stashed changes
             {
                 PlayerController.IsSearching = true;
                 Debug.Log("Searching: ");
                 ConversationManager.Instance.StartConversation(SearchIn);
                 ConversationManager.Instance.SetBool("IsFull", IsFull);
-<<<<<<< Updated upstream
-                PlayerController.IsSearching = true;
-
-=======
->>>>>>> Stashed changes
                 IsFull = false;
             }
             if (UseOnItem.IsUse)
