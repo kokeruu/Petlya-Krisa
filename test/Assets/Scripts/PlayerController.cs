@@ -1,60 +1,62 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public static Vector2 target;
     public static Animator anim;
-    public bool IsMoving = false;
+    public static bool IsMoving = false;
     private bool FaceRight = false;
     public static bool IsTalking = false;
     public static bool IsUsing = false;
     public static bool IsSearching = false;
+    public float speed = 30f;
+    public float stoppingDistance = 0.1f;
+
     void Awake()
     {
+        IsUsing = false;
+        IsSearching = false;
         IsTalking = false;
         anim = GetComponent<Animator>();
-        target = new Vector2(transform.position.x, transform.position.y);
+        target = transform.position;
+    }
+
+    void Update()
+    {
+        // Обработка клика (в Update для мгновенной реакции)
+        if (!IsTalking && !IsUsing && !IsSearching && !UseOnItem.IsUse && !InventoryUI.IsInv)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                ReflectPlayer();
+                IsMoving = true;
+                anim.SetBool("IsMoving", true);
+            }
+        }
     }
 
     void FixedUpdate()
     {
+        // Физика перемещения (остается в FixedUpdate)
         if (IsMoving)
         {
-            if (target == new Vector2(transform.position.x, transform.position.y))
+            transform.position = Vector2.MoveTowards(transform.position, target, Time.deltaTime * speed);
+
+            if (Vector2.Distance(transform.position, target) <= stoppingDistance)
             {
                 IsMoving = false;
                 anim.SetBool("IsMoving", false);
+                transform.position = target;
             }
         }
-        if (IsTalking )
-        {
 
-            target = new Vector2(transform.position.x, transform.position.y);
-            IsMoving = false;
+        // Блокировка движения при диалогах/использовании
+        if (IsTalking || IsUsing || IsSearching)
+        {
             anim.SetBool("IsMoving", false);
-
-        }
-        if (!IsTalking)
-        {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (Input.GetMouseButtonDown(0))
-            {
-                
-
-
-                target = new Vector2(mousePos.x, mousePos.y);
-                if (target.y > mousePos.y) target.y = target.y - 20;
-                else target.y = target.y + 20;
-                ReflectPlayer();
-                IsMoving = true;
-                anim.SetBool("IsMoving", true);
-
-            }
-
-
-            transform.position = Vector2.MoveTowards(transform.position, target, Time.deltaTime * 30f);
+            IsMoving = false;
+            target = transform.position;
         }
     }
 
@@ -68,16 +70,20 @@ public class PlayerController : MonoBehaviour
             FaceRight = !FaceRight;
         }
     }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        target = new Vector2(transform.position.x, transform.position.y);
+        target = transform.position;
         IsMoving = false;
         anim.SetBool("IsMoving", false);
-
     }
-        public void ConvEnd()
+
+    public void ConvEnd()
     {
-        PlayerController.IsTalking = false;
-        Debug.Log("Talk end: ");
+        IsTalking = false;
+        IsSearching = false;
+        IsUsing = false;
+        UseOnItem.IsUse = false;
+        Debug.Log("Talk end");
     }
 }

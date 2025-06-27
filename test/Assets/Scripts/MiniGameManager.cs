@@ -8,25 +8,31 @@ public class MiniGameManager : MonoBehaviour
 
     void Start()
     {
+        PlayerController.IsSearching = true;
         rulesPanel.SetActive(true);
         gamePanel.SetActive(false);
+        
     }
 
     public void StartGame()
     {
+        PlayerController.IsSearching = true;
         rulesPanel.SetActive(false);
         gamePanel.SetActive(true);
         cardGameController.StartNewGame();
+        
     }
 
     public void ExitGame()
     {
         rulesPanel.SetActive(true);
         gamePanel.SetActive(false);
+        
     }
 
     public void HideRules()
     {
         rulesPanel.SetActive(false);
+        PlayerController.IsSearching = false;
     }
 }

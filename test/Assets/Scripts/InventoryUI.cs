@@ -1,6 +1,8 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DialogueEditor;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -32,9 +34,11 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private Image descriptionImage;
     private InventorySlotUI selectedSlot;
+    public static bool IsInv;
 
     private void Awake()
     {
+        IsInv = false;
         // Получаем ссылку на систему инвентаря
         if (InventorySystem.current == null)
         {
@@ -42,7 +46,7 @@ public class InventoryUI : MonoBehaviour
             return;
         }
         inventorySystem = InventorySystem.current;
-        DontDestroyOnLoad(inventory);
+        // DontDestroyOnLoad(inventory);
         // Настраиваем кнопку
         openCloseButton.onClick.AddListener(ToggleInventory);
         // Скрываем инвентарь при старте если нужно
@@ -61,14 +65,14 @@ public class InventoryUI : MonoBehaviour
         combineButton.onClick.AddListener(OnCombineClicked);
         examineButton.onClick.AddListener(OnExamineClicked);
         if (descriptionPanel == null)
-        Debug.LogError("Description Panel is not assigned!");
+            Debug.LogError("Description Panel is not assigned!");
         if (titleText == null)
             Debug.LogError("Title Text is not assigned!");
         if (descriptionText == null)
             Debug.LogError("Description Text is not assigned!");
         if (descriptionImage == null)
             Debug.LogError("Description Image is not assigned!");
-        
+
         if (descriptionPanel != null)
             descriptionPanel.SetActive(false);
     }
@@ -95,9 +99,10 @@ public class InventoryUI : MonoBehaviour
     {
         bool newState = !inventoryPanel.activeSelf;
         inventoryPanel.SetActive(newState);
-        PlayerController.IsTalking = newState;
+        IsInv = newState;
         ConversationStarter.IsInv = newState;
-       
+        // UseOnItem.IsUse = !newState;
+        PlayerController.anim.SetBool("IsMoving", false);
         if (newState)
         {
             UpdateInventoryDisplay();
@@ -256,9 +261,12 @@ public void OnSlotClicked(InventorySlotUI slot)
             Debug.Log($"Using item: {selectedSlot.Item.data.displayName}");
 
             itemActionPanel.SetActive(false);
+            UseOnItem.IsUse = true;
+            UseOnItem.Effect = Int32.Parse(selectedSlot.Item.data.id);
         }
         ToggleInventory();
         UseOnItem.IsUse = true;
+        
 
     }
 
@@ -286,7 +294,6 @@ public void OnSlotClicked(InventorySlotUI slot)
 
 private IEnumerator CombineItemRoutine(InventoryItem firstItem)
 {
-    // Показываем сообщение о выборе второго предмета
     ShowNotification("Выберите предмет для комбинирования...");
 
     bool itemSelected = false;
@@ -295,67 +302,82 @@ private IEnumerator CombineItemRoutine(InventoryItem firstItem)
     // Ждем выбора второго предмета
     while (!itemSelected)
     {
-        if (Input.GetMouseButtonDown(0)) // ЛКМ
+        if (Input.GetMouseButtonDown(0))
         {
-            // Проверяем, кликнули ли по слоту
-            var raycastResults = new List<RaycastResult>();
-            var pointerEventData = new PointerEventData(EventSystem.current)
+            // Проверка клика по UI
+            if (EventSystem.current.IsPointerOverGameObject())
             {
-                position = Input.mousePosition
-            };
-            
-            EventSystem.current.RaycastAll(pointerEventData, raycastResults);
+                var pointerData = new PointerEventData(EventSystem.current)
+                {
+                    position = Input.mousePosition
+                };
+                
+                var results = new List<RaycastResult>();
+                EventSystem.current.RaycastAll(pointerData, results);
 
-            foreach (var result in raycastResults)
-            {
-                secondSlot = result.gameObject.GetComponent<InventorySlotUI>();
-                if (secondSlot != null && secondSlot.Item != null) break;
-            }
-
-            if (secondSlot != null && secondSlot.Item != null)
-            {
-                itemSelected = true;
+                foreach (var result in results)
+                {
+                    secondSlot = result.gameObject.GetComponent<InventorySlotUI>();
+                    if (secondSlot != null && secondSlot.Item != null)
+                    {
+                        // Нельзя комбинировать предмет сам с собой
+                        if (secondSlot.Item.data.id != firstItem.data.id)
+                        {
+                            itemSelected = true;
+                            break;
+                        }
+                    }
+                }
             }
         }
         yield return null;
     }
 
-    // Проверяем, можно ли объединить эти предметы
+    if (secondSlot == null || secondSlot.Item == null)
+    {
+        ShowNotification("Ошибка выбора предмета");
+        yield break;
+    }
+
+    // Проверка возможности комбинации
     if (CanCombineItems(firstItem.data, secondSlot.Item.data))
     {
-        // Удаляем оба предмета из инвентаря
+        // Удаляем предметы
         inventorySystem.Remove(firstItem.data);
         inventorySystem.Remove(secondSlot.Item.data);
 
-        // Добавляем результат комбинации
-        inventorySystem.Add(firstItem.data.combinationResult);
-        
-        ShowNotification($"Получен: {firstItem.data.combinationResult.displayName}");
+        // Добавляем результат
+        if (firstItem.data.combinationResult != null)
+        {
+            inventorySystem.Add(firstItem.data.combinationResult);
+            ShowNotification($"Получен: {firstItem.data.combinationResult.displayName}");
+        }
+        else
+        {
+            Debug.LogError("Нет результата комбинации!");
+            ShowNotification("Комбинация не дала результата");
+        }
     }
     else
     {
         ShowNotification("Эти предметы нельзя объединить");
     }
 }
-
 private bool CanCombineItems(InventoryItemData firstItem, InventoryItemData secondItem)
 {
-    // Проверяем, есть ли второй предмет в списке combinableWith первого
+    if (firstItem.combinableWith == null || secondItem.combinableWith == null)
+        return false;
+
     foreach (string combinableId in firstItem.combinableWith)
     {
         if (combinableId == secondItem.id)
-        {
             return true;
-        }
     }
-
-    // Проверяем наоборот (если комбинация двунаправленная)
+    
     foreach (string combinableId in secondItem.combinableWith)
     {
         if (combinableId == firstItem.id)
-        {
             return true;
-        }
     }
 
     return false;

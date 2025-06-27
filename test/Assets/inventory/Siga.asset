@@ -22,7 +22,9 @@ MonoBehaviour:
   maxUses: 1
   remainingUses: 1
   useEffects: []
-  examineDescription: 
+  examineDescription: "\u043D\u0435 \u043F\u0430\u0447\u043A\u0430, \u043A\u043E\u043D\u0435\u0447\u043D\u043E,
+    \u043D\u043E \u0442\u043E\u0436\u0435 \u043F\u0440\u0438\u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0432\u0430\u0442\u044C
+    \u043C\u043E\u0436\u043D\u043E"
   combinableWith: []
   combinationResult: {fileID: 0}
   slotBackgroundColor: {r: 0, g: 0, b: 0, a: 0}

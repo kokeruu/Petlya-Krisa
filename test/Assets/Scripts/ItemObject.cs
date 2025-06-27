@@ -14,8 +14,8 @@ public class ItemObject : MonoBehaviour
 
     public void PickupItem()
     {
-        // Проверяем, есть ли инвентарь в сцене
-        if (InventorySystem.current != null)
+        if (!PlayerController.IsTalking && !PlayerController.IsUsing && !PlayerController.IsSearching)
+        {if (InventorySystem.current != null)
         {
             Destroy(gameObject);  
             Debug.Log("добавила!");
@@ -23,6 +23,6 @@ public class ItemObject : MonoBehaviour
         else
         {
             Debug.LogError("InventorySystem not found in scene!");
-        }
+        }}
     }
 }

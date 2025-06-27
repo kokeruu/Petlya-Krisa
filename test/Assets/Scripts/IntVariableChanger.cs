@@ -6,7 +6,7 @@ public class IntVariableChanger : MonoBehaviour
     public string variableName;
     public int newValue;
 
-    public void ChangeIntVariable()
+    public void ChanIntVariable()
     {
         var field = typeof(Suzhet).GetField(variableName);
         if (field != null && field.FieldType == typeof(int))
@@ -16,7 +16,7 @@ public class IntVariableChanger : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"Переменная {variableName} не найдена или не является int!");
+            Debug.LogError($"Переменная {variableName} не найдена или не является bool!");
         }
     }
 }

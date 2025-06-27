@@ -5,19 +5,22 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class UseOnItem : MonoBehaviour
 {
-    [SerializeField] private NPCConversation useOn;
     public static bool IsUse = false;
+    public static int Effect = 0;
+    [SerializeField] private NPCConversation useOn;
     [SerializeField] private bool IsUsable;
-    void OnMouseDown()
-    {
-        if (IsUse)
+void OnMouseDown()
+{
+        if (!ConversationStarter.IsInv && !PlayerController.IsTalking && !PlayerController.IsUsing && !PlayerController.IsSearching && UseOnItem.IsUse)
         {
-            ConversationManager.Instance.SetBool("IsUsable", IsUsable);
-            Debug.Log("Using: ");
+            PlayerController.IsUsing = true;
             ConversationManager.Instance.StartConversation(useOn);
-            PlayerController.IsTalking = true;
-            PlayerController.IsUsing= true;
-            Debug.Log("Talk: ");
-        }
+            ConversationManager.Instance.SetBool("IsUsable", IsUsable);
+            ConversationManager.Instance.SetInt("Effect", Effect);
+            UseOnItem.IsUse = false;
     }
 }
+         
+}
+
+   

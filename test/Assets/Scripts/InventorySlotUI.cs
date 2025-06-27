@@ -5,7 +5,7 @@ public class InventorySlotUI : MonoBehaviour
 {
     [SerializeField] private Image icon;
     // [SerializeField] private Text countText;
-    // [SerializeField] private Button slotButton;
+    [SerializeField] private Button slotButton;
     
     private InventoryItem item;
     private System.Action<InventorySlotUI> onClick;
@@ -18,7 +18,7 @@ public class InventorySlotUI : MonoBehaviour
         if (icon == null) icon = GetComponentInChildren<Image>();
         
         // Назначаем обработчик клика
-        // slotButton.onClick.AddListener(OnClick);
+        slotButton.onClick.AddListener(OnClick);
     }
     public void Initialize(InventoryItem newItem, System.Action<InventorySlotUI> clickAction)
     {

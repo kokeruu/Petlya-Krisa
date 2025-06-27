@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ed904a1c4458d40917e774037ae43f, type: 3}
+  m_Name: New Inventory Item Data
+  m_EditorClassIdentifier: 
+  id: 
+  displayName: 
+  icon: {fileID: 0}
+  prefab: {fileID: 7121817971063913063, guid: 97f8b485763d91a44bb198c21caa8632, type: 3}
+  canBeUsed: 0
+  canBeCombined: 0
+  canBeExamined: 1
+  maxUses: 1
+  remainingUses: 1
+  useEffects: []
+  examineDescription: 
+  combinableWith: []
+  combinationResult: {fileID: 0}
+  slotBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  interactionSound: {fileID: 0}

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;  // Для кнопок
+using UnityEngine.UI;
+using DialogueEditor;  // Для кнопок
 
 public class CardGameController : MonoBehaviour
 {
@@ -127,6 +128,9 @@ public class CardGameController : MonoBehaviour
             if (opponentScore > 21)
             {
                 resultText.text = $"Вы победили! У соперника перебор: {opponentScore}";
+                Suzhet.ifyouwin = true;
+
+
             }
             else if (opponentScore > playerScore)
             {
@@ -135,12 +139,15 @@ public class CardGameController : MonoBehaviour
             else if (opponentScore < playerScore)
             {
                 resultText.text = $"Вы победили! У соперника: {opponentScore}";
+                Suzhet.ifyouwin = true;
+
             }
             else
             {
                 resultText.text = $"Ничья! У соперника тоже {opponentScore}";
             }
         }
+        
     }
 
     private void RestartGame()

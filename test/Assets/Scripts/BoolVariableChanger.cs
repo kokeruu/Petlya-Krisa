@@ -2,28 +2,21 @@ using UnityEngine;
 
 public class BoolVariableChanger : MonoBehaviour
 {
-    [Tooltip("Выберите, какую переменную изменять")]
-    public enum BoolVariableType
-    {
-        IszapiskaRRead,
-        IsDoorOpened
-    }
-
-    public BoolVariableType variableToChange;
+    [Tooltip("Имя переменной (должна быть статической в Suzhet)")]
+    public string variableName;
     public bool newValue;
 
     public void ChangeBoolVariable()
     {
-        switch (variableToChange)
+        var field = typeof(Suzhet).GetField(variableName);
+        if (field != null && field.FieldType == typeof(bool))
         {
-            case BoolVariableType.IszapiskaRRead:
-                Suzhet.IszapiskaRRead = newValue;
-                Debug.Log($"IszapiskaRRead изменено на: {newValue}");
-                break;
-            case BoolVariableType.IsDoorOpened:
-                Suzhet.IsDoorOpened = newValue;
-                Debug.Log($"IsDoorOpened изменено на: {newValue}");
-                break;
+            field.SetValue(null, newValue);
+            Debug.Log($"{variableName} изменено на: {newValue}");
+        }
+        else
+        {
+            Debug.LogError($"Переменная {variableName} не найдена или не является bool!");
         }
     }
 }
